@@ -3,6 +3,26 @@
 import { useEffect, useRef } from 'react';
 import Head from 'next/head';
 
+// --- Type definitions ---
+type DosboxInstance = {
+  run: (zipUrl: string, exePath: string) => void;
+  exit?: () => void;
+  requestFullScreen?: () => void;
+};
+
+type DosboxConstructor = new (options: {
+  id: string;
+  onload: (instance: DosboxInstance) => void;
+  onrun?: (instance: DosboxInstance, app: string) => void;
+}) => DosboxInstance;
+
+declare global {
+  interface Window {
+    Dosbox?: DosboxConstructor;
+    dosbox?: DosboxInstance;
+  }
+}
+
 export default function DoomPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
@@ -15,23 +35,23 @@ export default function DoomPage() {
     script.id = 'js-dos-api';
     script.async = true;
     script.onload = () => {
-      // @ts-ignore
       if (window.Dosbox) {
-        // @ts-ignore
         const dosbox = new window.Dosbox({
           id: 'dosbox',
-          onload: function (dosboxInstance: any) {
-            dosboxInstance.run("https://thedoggybrad.github.io/doom_on_js-dos/DOOM-@evilution.zip", "./DOOM/DOOM.EXE");
+          onload: function (dosboxInstance: DosboxInstance) {
+            dosboxInstance.run(
+              "https://thedoggybrad.github.io/doom_on_js-dos/DOOM-@evilution.zip",
+              "./DOOM/DOOM.EXE"
+            );
             setTimeout(() => {
               const canvas = document.querySelector('.dosbox-container canvas') as HTMLCanvasElement;
               if (canvas) canvas.focus();
             }, 2000);
           },
-          onrun: function (_: any, app: string) {
+          onrun: function (_: DosboxInstance, app: string) {
             console.log(`Running: ${app}`);
           },
         });
-        // @ts-ignore
         window.dosbox = dosbox;
       } else {
         alert('Failed to load js-dos. Please try again.');
@@ -47,9 +67,7 @@ export default function DoomPage() {
       if (scriptRef.current) {
         document.body.removeChild(scriptRef.current);
       }
-      // @ts-ignore
       if (window.dosbox && typeof window.dosbox.exit === 'function') {
-        // @ts-ignore
         window.dosbox.exit();
       }
     };
@@ -104,7 +122,7 @@ export default function DoomPage() {
         ></div>
         <button
           aria-label="Enter fullscreen"
-          onClick={() => (window as any).dosbox?.requestFullScreen()}
+          onClick={() => window.dosbox?.requestFullScreen?.()}
           className="doom-btn"
         >
           Fullscreen

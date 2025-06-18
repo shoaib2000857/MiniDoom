@@ -1,13 +1,15 @@
-# Doom Clone Web App
+# DOOM on the Web
 
-A simple Doom-style first-person shooter built with Next.js and TypeScript.  
-Uses HTML5 Canvas and a basic raycasting engine for rendering.
+A tribute to the classic DOOM, playable right in your browser!  
+Built with Next.js and TypeScript, this site features a DOOM-themed interface and runs the original DOOM shareware using [js-dos](https://js-dos.com/).
 
 ## Features
 
-- Basic 3D raycasting engine (Wolfenstein/Doom style)
-- Keyboard controls (WASD to move, arrows to turn)
-- Responsive web app
+- **Play the real DOOM shareware** in your browser (via DOSBox emulation)
+- DOOM-inspired UI and styling throughout the site
+- Large, centered game area with fullscreen support
+- Keyboard controls (just like the original DOOM)
+- No downloads required
 
 ## Getting Started
 
@@ -25,16 +27,23 @@ Uses HTML5 Canvas and a basic raycasting engine for rendering.
 
 ## Project Structure
 
-- `src/components/DoomGame.tsx` — Main game component (Canvas + logic)
-- `src/utils/gameEngine.ts` — Raycasting and game logic
-- `pages/index.tsx` — Home page, renders the game
-- `styles/globals.css` — Basic styles
+- `app/page.tsx` — Home page (DOOM-themed landing page)
+- `app/game/page.tsx` — Main DOOM game area (js-dos embed)
+- `styles/globals.css` — Global DOOM-inspired styles
 
 ## Controls
 
-- **W/A/S/D** — Move forward/left/back/right
-- **Left/Right Arrow** — Turn left/right
+- **Click inside the game window to enable controls**
+- **Arrow keys** — Move/turn
+- **Ctrl, Alt, Space** — Fire, open doors, etc. (as in classic DOOM)
+
+## Credits
+
+- [js-dos](https://js-dos.com/) for DOSBox emulation in the browser
+- [id Software](https://www.idsoftware.com/) for the original DOOM
 
 ## License
 
 MIT
+
+> **Not affiliated with id Software. DOOM is © id Software. This project is for educational and
