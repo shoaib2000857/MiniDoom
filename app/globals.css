@@ -1,26 +1,52 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #1a1a1a;
+  color: #f44336;
+  font-family: 'Share Tech Mono', 'Consolas', 'Courier New', monospace;
+  letter-spacing: 0.03em;
+}
+
+a, button {
+  color: #f44336;
+  transition: color 0.2s, background 0.2s;
+}
+
+a:hover, button:hover {
+  color: #fff;
+  background: #f44336;
+}
+
+.doom-title {
+  font-family: 'Share Tech Mono', 'Consolas', 'Courier New', monospace;
+  font-size: 3rem;
+  color: #ffcc00;
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #900;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.doom-panel {
+  background: linear-gradient(180deg, #222 80%, #900 100%);
+  border: 4px solid #ffcc00;
+  border-radius: 12px;
+  box-shadow: 0 0 32px #900a, 0 0 0 8px #222 inset;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.doom-btn {
+  background: #900;
+  color: #ffcc00;
+  border: 2px solid #ffcc00;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 0.6em 1.5em;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.doom-btn:hover {
+  background: #ffcc00;
+  color: #900;
 }
